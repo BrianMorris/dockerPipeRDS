@@ -5,19 +5,22 @@ code for using a docker container on AWS Fargate to pipe RDS databases.
 **Our bash script has default Source and Destination values set for: database user, password, host, database name
 Any of these values can be overriden when configuring the task to run in AWS Fargate (See step 4 of Part 2).**
 
-
+**By Default we are writing to an existing database, to create a new database as part of our process see the Extras section**
 Here are the steps to take after cloning the github Repo:
 
 ### Part 1: Build image and push to docker hub
 1) cd to cloned folder and use docker file to create a docker image with command: 
+
 ```docker build -t imagename .```
 
 2) rename .env.sh.config file to .env.sh and populate with default username and password, and configure default host and db name in pipe.sh file 
 
 3) tag docker image to prepare for pushing:
+
 ```docker tag imagename userRepo/imagename```
 
-4) Push image to Docker hub
+4) Push image to Docker hub:
+
 ```docker push userRepo/imagename```
 
 ### Part 2: Create and Run Task in AWS Elastic Container Service > Fargate
@@ -40,6 +43,13 @@ as keys. and if you want to change the destination variables, subsitute SRC with
 
 **Once we have a task defined in AWS ECS, we only need to perform steps 3-5 in Part 2.**
 
-In the case we want to edit our image, we only need select revise task under task definition and reload the new image to our task definition.
+In the case we want to edit our image, after we rebuild and push to docker hub we only need select revise task under task definition and reload the new image to our task definition.(Part 2: step 3)
 
 
+### Extra
+If you want to create a new database on the host as part of your process set this env variable in Part 2 step 4:
+
+```key: CREATE_DATABASE
+value: true```
+
+the database created will be the one set by the variable DB_NAME_DEST
