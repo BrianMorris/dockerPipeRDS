@@ -49,7 +49,7 @@ In the case we want to edit our image, after we rebuild and push to docker hub w
 ### Extra
 If you want to create a new database on the host as part of your process set this env variable in Part 2 step 4:
 
-```key: CREATE_DATABASE
-value: true```
+```key: CREATE_DATABASE```
+```value: true```
 
 the database created will be the one set by the variable DB_NAME_DEST
