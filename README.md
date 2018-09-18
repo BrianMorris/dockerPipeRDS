@@ -12,15 +12,18 @@ Any of these values can be overriden when configuring the task to run in AWS Far
 Here is process from cloning github Repo:
 
 1) cd to cloned folder and use docker file to create a docker image with command: 
-docker build -t imagename .
+
+```docker build -t imagename .```
 
 2) rename .env.sh.config file to .env.sh and populate with default username and password, and configure default host and db name in pipe.sh file 
 
 3) tag docker image to prepare for pushing:
-docker tag imagename userRepo/imagename
+
+```docker tag imagename userRepo/imagename```
 
 4) Push image to Docker hub
-docker push userRepo/imagename
+
+```docker push userRepo/imagename```
 
 5) Navigate to AWS ECS management panel: (something like https://console.aws.amazon.com/ecs/home)
 
